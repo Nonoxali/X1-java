@@ -17,6 +17,22 @@ public final class IIf extends AbstractInstruction {
 
   @Override
   public void codegen(CodeGen cg) {
-    throw new UnsupportedOperationException(); // FIXME
+	   String lbl1 = CodeGen.generateLabel();
+	    String lbl2 = CodeGen.generateLabel();
+	    
+	    // Assemble condition
+	    this.condition.codegen(cg);
+	    // If condition is 0, jump to lbl1 (false)
+	    cg.pushInstruction(new GTZ(lbl1));
+	    // Generate true code for the body
+	    this.iftrue.codegen(cg);
+	    // Jump to lbl2 because true has been executed
+	    cg.pushInstruction(new GTO(lbl2));
+	    // Push start of block label
+	    cg.pushLabel(lbl1);
+	    // Generate false code for the body
+	    this.iffalse.codegen(cg);
+	    //Push end of condition label
+	    cg.pushLabel(lbl2);
   }
 }

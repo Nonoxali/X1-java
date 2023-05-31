@@ -14,8 +14,7 @@ public final class EBool extends AbstractExpr {
 
   @Override
   public void codegen(CodeGen cg) {
-	  if(value) cg.pushLocalVariable(1,);
-	  
-    throw new UnsupportedOperationException(); // FIXME
-  }
+	  if(value) cg.pushInstruction(new PUSH(1));
+	  else cg.pushInstruction(new PUSH(0));
+	  }
 }

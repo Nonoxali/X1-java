@@ -13,6 +13,7 @@ public final class IAssign extends AbstractInstruction {
 
   @Override
   public void codegen(CodeGen cg) {
-    throw new UnsupportedOperationException(); // FIXME
+	  rvalue.codegen(cg);
+	  if(lvalue.isPresent()) cg.pushInstruction(new WFR(cg.offset(lvalue.get())));
   }
 }

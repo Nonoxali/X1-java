@@ -22,8 +22,9 @@ public final class IWhile extends AbstractInstruction {
     cg.pushInstruction(new GTZ(lbl2));
     // Generate code for the body
     this.body.codegen(cg);
-    // To be continued...
-    
-    throw new UnsupportedOperationException(); // FIXME
+    // Jump to lbl1 because body has been gen'd
+    cg.pushInstruction(new GTO(lbl1));
+    //Push end of loop label
+    cg.pushLabel(lbl2);
   }
 }

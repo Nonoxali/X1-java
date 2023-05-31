@@ -10,8 +10,6 @@ public final class EVar extends AbstractExpr {
 
   @Override
   public void codegen(CodeGen cg) {
-	  cg.pushInstruction(new PUSH(codeGen.));
-	  cg.pushInstruction(new READ());
-    throw new UnsupportedOperationException(); // FIXME
+	  cg.pushInstruction(new RFR(cg.offset(this.name)));
   }
 }

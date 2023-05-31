@@ -20,6 +20,8 @@ public final class IBlock extends AbstractInstruction {
 
   @Override
   public void codegen(CodeGen cg) {
-    throw new UnsupportedOperationException(); // FIXME
+	  for(int i =0; i< body.size();i++){
+		  this.body.get(i).codegen(cg);
+	  }
   }
 }
