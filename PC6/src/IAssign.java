@@ -1,7 +1,6 @@
 import edu.polytechnique.xvm.asm.opcodes.*;
 import java.util.Optional;
 
-@SuppressWarnings("unused")
 public final class IAssign extends AbstractInstruction {
   public final Optional<String> lvalue; // (optional) left-value
   public AbstractExpr           rvalue; // right-value (expression)

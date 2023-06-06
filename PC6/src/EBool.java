@@ -1,6 +1,6 @@
 import edu.polytechnique.xvm.asm.opcodes.*;
 
-@SuppressWarnings("unused")
+
 public final class EBool extends AbstractExpr {
   public final boolean value; // Literal value
 

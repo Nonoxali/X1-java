@@ -1,7 +1,7 @@
 import edu.polytechnique.xvm.asm.opcodes.*;
 import edu.polytechnique.mjava.ast.BinOp;
 
-@SuppressWarnings("unused")
+
 public final class EBinOp extends AbstractExpr {
   public final BinOp        op   ;    // operator (enum)
   public final AbstractExpr left ;    // left operand

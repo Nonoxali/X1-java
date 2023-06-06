@@ -1,6 +1,6 @@
 import edu.polytechnique.xvm.asm.opcodes.*;
 
-@SuppressWarnings("unused")
+
 public final class IIf extends AbstractInstruction {
   public final AbstractExpr        condition; // condition (<> 0 => true)
   public final AbstractInstruction iftrue   ; // if "true  (<> 0)" branch

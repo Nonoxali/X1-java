@@ -1,6 +1,5 @@
 import edu.polytechnique.xvm.asm.opcodes.*;
 
-@SuppressWarnings("unused")
 public final class EInt extends AbstractExpr {
   public final int value; // literal value
 

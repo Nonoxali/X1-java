@@ -1,6 +1,5 @@
 import edu.polytechnique.xvm.asm.opcodes.*;
 
-@SuppressWarnings("unused")
 public final class EVar extends AbstractExpr {
   public final String name; // variable name
 

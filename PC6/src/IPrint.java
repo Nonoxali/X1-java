@@ -1,6 +1,6 @@
 import edu.polytechnique.xvm.asm.opcodes.*;
 
-@SuppressWarnings("unused")
+
 public final class IPrint extends AbstractInstruction {
   public final AbstractExpr expr; // Expression (int) to print
   
