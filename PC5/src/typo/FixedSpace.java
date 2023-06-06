@@ -1,11 +1,11 @@
 package typo;
-
+@SuppressWarnings("unused")
 public class FixedSpace extends Space{
 	final private double size;
 	
-	FixedSpace(double dim){
+	public FixedSpace(double dim){
 		super(dim,0);
-		size= dim;
+		this.size= dim;
 		
 	}
 	

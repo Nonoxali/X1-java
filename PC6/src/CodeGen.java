@@ -2,16 +2,19 @@ import java.util.*;
 
 import edu.polytechnique.xvm.asm.*;
 import edu.polytechnique.xvm.asm.interfaces.*;
+import edu.polytechnique.mjava.ast.TProcDef;
 
 public final class CodeGen {
   private Vector<AsmInstruction> instructions;
   private Map<String, Integer>   labels;
-  private Map<String, Integer>   offsets;
+  public Map<String, Integer>   offsets;
+  public TProcDef<AbstractExpr, AbstractInstruction> proc;
 
   public CodeGen() {
     this.instructions = new Vector<AsmInstruction>();
     this.labels = new HashMap<String, Integer>();
     this.offsets = new HashMap<String, Integer>();
+    
   }
 
   private static int labelc = 0;
@@ -23,7 +26,7 @@ public final class CodeGen {
   }
 
   public void pushLabel(String label) {
-	  labels.put(label, instructions.capacity());
+	  labels.put(label, instructions.size());
   }
 
   public void pushInstruction(AsmInstruction asm) {
@@ -40,6 +43,14 @@ public final class CodeGen {
   
   public int offset(String name) {
 	  return offsets.get(name);
+  }
+  
+  public void setProc(TProcDef<AbstractExpr, AbstractInstruction> proc) {
+	  this.proc = proc;
+  }
+  
+  public TProcDef<AbstractExpr, AbstractInstruction> getProc(){
+	  return proc;
   }
   
   @Override

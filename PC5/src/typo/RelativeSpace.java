@@ -3,7 +3,7 @@ package typo;
 public class RelativeSpace extends Space {
 
 	
-	RelativeSpace(double c, java.awt.Font f) {
+	public RelativeSpace(double c, java.awt.Font f) {
 		super(c*f.getSize(),1);
 		
 	}

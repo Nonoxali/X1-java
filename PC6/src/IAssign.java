@@ -15,5 +15,6 @@ public final class IAssign extends AbstractInstruction {
   public void codegen(CodeGen cg) {
 	  rvalue.codegen(cg);
 	  if(lvalue.isPresent()) cg.pushInstruction(new WFR(cg.offset(lvalue.get())));
+	  else cg.pushInstruction(new POP());
   }
 }

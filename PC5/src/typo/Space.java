@@ -1,13 +1,13 @@
 package typo;
 
 import java.awt.Graphics;
-
-public class Space {
+@SuppressWarnings("unused")
+public class Space extends Group{
 	
 	final private double width;
 	final private double stretchingCapacity;
 	
-	Space(double w, double stretch){
+	public Space(double w, double stretch){
 		this.width = w;
 		this.stretchingCapacity = stretch;
 	}
