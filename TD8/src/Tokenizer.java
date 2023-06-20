@@ -7,80 +7,129 @@ public class Tokenizer {
 	public boolean isIntNum;
 	public double num;
 	public Calculator calc;
+	public boolean isNonIntNum;
+	int decimalDigits;
+	boolean isMinUnary;
+	boolean isNeg;
 	
 	public Tokenizer() {
-		this.isStart = true;
-		this.isIntNum = false;
+		this.isStart = true; // vrai ssi tout debut ou apres =
+		this.isIntNum = false;//vrai ssi lire entier
+		this.isNonIntNum = false; //
+		this.decimalDigits = 0;
 		this.num = 0;
 		this.calc = new Calculator();
+		this.isMinUnary = true;
+		this.isNeg = false;
 	}
 	
 	//METHODES 
 	
 	public void readChar(char c) {
-		switch(c){
+		if(Character.isDigit(c)) {
+			isStart = false;
+			if(num == 0 && c !='.' && !isNonIntNum) {
+				isIntNum = true;
+			}
+			int val = isNeg? 1 : 0;
+	    	   if(isIntNum) {
+	    		   num = 10*num + Character.getNumericValue(c)*Math.pow(-1,val);		    		   
+	    	   }
+	    	   else if(isNonIntNum) {
+	    		   num = num + Character.getNumericValue(c)/Math.pow(10, decimalDigits)*Math.pow(-1,val);
+	    		   decimalDigits++;
+	    	   }
+	    	   
+		}
+		else  {
+			if(isIntNum && c!='.') {
+				calc.pushDouble(num);
+				isIntNum = false;
+				isMinUnary = false;
+				isNeg = false;
+			}
+			if(isNonIntNum && c!='.') {
+				calc.pushDouble(num);
+				isNonIntNum = false;
+				decimalDigits = 0;
+				isMinUnary = false;
+				isNeg = false;
+			}
+			isStart = false;
+		switch(c){	
+		
 		   
 	       case '=': 
+	    	   isMinUnary = true;
 	    	   isStart = true;
-				calc.pushDouble(num);
 				this.num = 0;
 				calc.commandEqual();
+				System.out.println();
+				isMinUnary = true;
 	           break;
+	           
+	       case 'C': 
+	    	   this.calc = new Calculator();
+	    	   this.isStart = true; // vrai ssi tout debut ou apres =
+	   		this.isIntNum = false;//vrai ssi lire entier
+	   		this.isNonIntNum = false; //
+	   		this.decimalDigits = 0;
+	   		this.num = 0;
+	   		this.calc = new Calculator();
+	   		this.isMinUnary = true;
+	   		this.isNeg = false;
+	           break;
+	           
+	       case '.' :
+	    	   isIntNum = false;
+	    	   isNonIntNum = true;
+	    	   this.decimalDigits++;
+	    	   isMinUnary = false;
+	    	   break;
 	   
 	       case '+':
-	    	   calc.pushDouble(num);
+	    	   isMinUnary = true;
 	    	   calc.commandOperator(Operator.PLUS);
 	    	   this.num = 0;
-	    	   isStart = false;
-	    	   isIntNum = false;
 	           break;
 	   
 	       case '-':
-	    	   calc.pushDouble(num);
-	    	   calc.commandOperator(Operator.MINUS);
+	    	   if(isMinUnary) isNeg = true;
+	    	   else { 
+	    		calc.commandOperator(Operator.MINUS);
 	    	   this.num = 0;
-	    	   isStart = false;
-	    	   isIntNum = false;
+	    	   isMinUnary = true;
+				}
 	           break;
 	       
 	       case '*':
-	    	   calc.pushDouble(num);
+	    	   isMinUnary = true;
+				isNeg = false;
 	    	   calc.commandOperator(Operator.MULT);
 	    	   this.num = 0;
-	    	   isStart = false;
-	    	   isIntNum = false;
+	    	   
 	           break;
 	           
 	       case '/':
-	    	   calc.pushDouble(num);
+	    	   isMinUnary = true;
 	    	   calc.commandOperator(Operator.DIV);
 	    	   this.num = 0;
-	    	   isStart = false;
-	    	   isIntNum = false;
 	           break;
 	           
-	       case '(':
-	    	   //calc.pushDouble(num);
+	   	case '(' :
+	   		isMinUnary = true;
 	    	   calc.commandLPar();
-	    	   //this.num = 0;
-	    	   isStart = false;
-	    	   isIntNum = false;
-	           break;
+	    	   isMinUnary = true;
+	    	   break;
 	        
 	       case ')':
-	    	  // calc.pushDouble(num);
 	    	   calc.commandRPar();
-	    	   //this.num = 0;
-	    	   isStart = false;
-	    	   isIntNum = false;
+	    	   isMinUnary = false;
 	           break; 
 	           
 	       default:
-	    	   isStart = false;
-	    	   isIntNum = true;
-	    	   //i= (int) Math.log10(num) ;
-	    	   //System.out.println("i="+i);
-	    	   num = 10*num + Character.getNumericValue(c);			
+	    	}
+		
 		}		
 	}
 	
@@ -89,20 +138,13 @@ public class Tokenizer {
 		for(int i=0; i<s.length();i++) {
 			c= s.charAt(i);
 			readChar(c);
-		}
+			}
 	}
 	
 	
 	
 	public static void main(String[] args) {
-		Tokenizer tk = new Tokenizer();
-	    tk.readChar('(');
-	    System.out.println(tk.num);
-	    tk.readChar('(');
-	    System.out.println(tk.num);
-	    System.out.println(tk.calc.toString());
-		// TODO Auto-generated method stub
 
-	}
+	    	}
 
 }

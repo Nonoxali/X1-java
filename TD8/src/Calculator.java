@@ -19,9 +19,9 @@ public class Calculator {
 	public String toString() {
 		String s = new String("Numbers : \n");
 		s+=numbers.toString();
-		s+= "\n";
+		s+= "\nOperators : \n";
 		s+=operators.toString();
-		s+= "\n";
+		s+= "\nResults : \n";
 		s+=results.toString();
 		return s;
 	}
@@ -41,6 +41,7 @@ public class Calculator {
 	void executeBinOperator( Operator op ) {
 		double a = numbers.pop();
 		double b = numbers.pop();
+		
 		
 		switch(op){
 		   
@@ -74,13 +75,16 @@ public class Calculator {
 	           return 1;
 	   
 	       case MINUS:
-	    	  return 2;
+	    	  return 1;
 	   
 	       case MULT:
-	    	  return 3;
+	    	  return 2;
 	           
 	       case DIV:
-	    	   return 4;
+	    	   return 2;
+	    	   
+	       case OPEN:
+	    	   return -1;
 	    	   
 	       default:
 				return 0;
@@ -136,10 +140,7 @@ public class Calculator {
 		numbers.add(results.get(results.size()-i));
 	}
 	public static void main(String[] args) {
-		Calculator a = new Calculator();
-		a.commandOperator(Operator.OPEN);
-		a.commandOperator(Operator.OPEN);
-		System.out.println(a.toString());
+
 	}
 
 }
